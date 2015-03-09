@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/components-canvas';
+import layout from '../templates/components/collection-canvas';
 
 export default Ember.Component.extend({
 
