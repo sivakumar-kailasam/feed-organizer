@@ -10,11 +10,32 @@ module.exports = function(app) {
   feedRouter.get('/', function(req, res) {
     fs.readFile('server/data_store/collections.json', function(err, collectionData) {
       fs.readFile('server/data_store/feeds.json', function(feedErr, feedData) {
-        res.send({
-          collection: JSON.parse(collectionData),
-          feed: JSON.parse(feedData)
-        });
-      })
+
+        var collectionId = req.query.collection;
+        var feedDataToReturn = JSON.parse(feedData);
+
+        if (!collectionId) {
+          res.send({
+            collection: JSON.parse(collectionData),
+            feed: feedDataToReturn
+          });
+        } else {
+
+          feedDataToReturn = feedDataToReturn.filter(function(feed) {
+            if (feed.collection.indexOf(collectionId) !== -1) {
+              return feed;
+            }
+          });
+
+          res.send({
+            feed: feedDataToReturn
+          });
+          
+        }
+
+
+
+      });
     });
   });
 
@@ -26,7 +47,7 @@ module.exports = function(app) {
     fs.readFile('server/data_store/feeds.json', function(err, data) {
       var feed = _.find(JSON.parse(data), function(feed) {
         return feed.id === req.params.id;
-      })
+      });
 
       res.send({
         feed: feed

@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-	
+
 	queryParams: ['collection', 'feed'],
 
 
@@ -12,18 +12,34 @@ export default Ember.Controller.extend({
 	feed: null,
 
 
-	filteredFeeds: function(){
-		
-		let feed = this.get('feed');
+	filteredFeeds: function() {
 
-		if(Ember.isBlank(feed)){
+		let collection = this.get('collection');
+
+		if (Ember.isBlank(collection)) {
 			return this.store.findAll('feed');
-		} 
+		} else {
+			return this.store.find('feed', {
+				collection: collection
+			});
+		}
 
-	}.property('feed', 'model', 'collection'),
 
 
-	collections: Ember.computed.alias('model.collections')
-	
+	}.property('model', 'collection'),
+
+
+	collections: Ember.computed.alias('model.collections'),
+
+
+	actions: {
+
+		filterByCollection: function(collectionId) {
+			this.set('collection', collectionId)
+			''
+		}
+
+	}
+
 
 });

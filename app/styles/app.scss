@@ -1,46 +1,3 @@
-// body {
-// 	display: flex;
-// 	flex-direction: column;
-// 	background: #639;
-
-// }
-
-// .ember-view {
-// 	display: flex;
-// 	flex-direction: column;
-// }
-
-// .flex {
-// 	&-container {
-// 		display: flex;
-// 		flex-flow: row wrap;
-// 		justify-content: center;
-// 		align-content: flex-start;
-// 		align-items: stretch;
-// 		width: 100%;	
-// 		height: 100%;
-// 		position: relative;
-// 	}
-
-// 	&-item {
-// 		display: flex;
-// 		justify-content: center;
-// 		align-items: center;
-// 		position: relative;
-// 		text-align: center;
-// 	}
-// }
-
-// .feed-area {
-// 	height: 60%;
-// 	width: 100%;
-// }
-
-// .collections-area {
-// 	height: 40%;
-// 	width: 100%;
-// }
-
 body,
 .ember-view,
 .content-area, {
@@ -55,11 +12,16 @@ body {
 }
 
 .feed-area,
-.collections-area {
+.collections-area{
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	overflow-y: auto;
+	padding-bottom: 100px;
+}
+
+.filter-section{
+	overflow: hidden;
 }
 
 .feed-area { 

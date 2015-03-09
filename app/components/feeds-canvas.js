@@ -1,20 +1,19 @@
 import Ember from 'ember';
 import layout from '../templates/components/feeds-canvas';
+import FlexItemHeightModifierMixin from '../mixins/flex-item-height-modifier';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(FlexItemHeightModifierMixin, {
+
+
+	tagName: 'section',
+
+
+	heightPercentToSet: 50,
 
 
 	layout: layout,
 
 
-	classNames: ['feed-area'],
-
-
-	adjustHeight: function() {
-
-		let windowHeight = Ember.$(window).height();
-		this.$().height(windowHeight * 0.6);
-		
-	}.on('didInsertElement')
+	classNames: ['feed-area']
 
 });

@@ -1,21 +1,27 @@
 import Ember from 'ember';
 import layout from '../templates/components/collection-canvas';
+import FlexItemHeightModifierMixin from '../mixins/flex-item-height-modifier';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(FlexItemHeightModifierMixin, {
+
+
+	tagName: 'section',
 
 	
+	heightPercentToSet: 30,
+
+
 	layout: layout,
 
 
 	classNames: ['collections-area'],
 
 
-	adjustHeight: function() {
-
-		let windowHeight = Ember.$(window).height();
-		this.$().height(windowHeight * 0.4);
-		
-	}.on('didInsertElement')
+	actions: {
+		filterFeedsByCollectionName: function(collectionId){
+			this.sendAction('filterCollectionName', collectionId);
+		}
+	}
 
 
 });
