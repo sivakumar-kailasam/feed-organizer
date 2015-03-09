@@ -2,6 +2,7 @@
     {
         "engagement": 256,
         "feeds": [
+            "feed/http://scobleizer.com/feed/",
             "feed/http://feeds.feedburner.com/forentrepreneurs",
             "feed/http://feeds.feedburner.com/entrepreneur/latest",
             "feed/http://feeds.feedburner.com/AVc",

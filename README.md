@@ -21,8 +21,8 @@ You will need the following things properly installed on your computer.
 * `bower install`
 
 ## Running / Development
-
 * `ember server`
+* curl/visit [http://localhost:4200/api/refresh-store](http://localhost:4200/api/refresh-store) which will repopulate data store based off _server/static_data.js_
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ### Code Generators

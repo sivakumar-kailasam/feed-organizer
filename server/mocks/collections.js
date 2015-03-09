@@ -3,12 +3,15 @@
 module.exports = function(app) {
 
   var express = require('express');
-  var collections = require('../data_store/collections.json');
   var collectionRouter = express.Router();
+  var fs = require('fs');
+
 
   collectionRouter.get('/', function(req, res) {
-    res.send({
-      'collection': collection
+    fs.readFile('server/data_store/collections.json', function(err, data) {
+      res.send({
+        collection: JSON.parse(data)
+      });
     });
   });
 
@@ -36,5 +39,5 @@ module.exports = function(app) {
     res.status(204).end();
   });
 
-  app.use('/api/collection', collectionRouter);
+  app.use('/api/collections', collectionRouter);
 };

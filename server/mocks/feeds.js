@@ -3,12 +3,15 @@
 module.exports = function(app) {
 
   var express = require('express');
-  var feeds = require('../data_store/feeds.json');
   var feedRouter = express.Router();
+  var fs = require('fs');
+  var _ = require('lodash');
 
   feedRouter.get('/', function(req, res) {
-    res.send({
-      'feed': feeds
+    fs.readFile('server/data_store/feeds.json', function(err, data) {
+      res.send({
+        feed: JSON.parse(data)
+      });
     });
   });
 
@@ -17,16 +20,19 @@ module.exports = function(app) {
   });
 
   feedRouter.get('/:id', function(req, res) {
-    res.send({
-      'collection': {
-        id: req.params.id
-      }
+    fs.readFile('server/data_store/feeds.json', function(err, data) {
+      var feed = _.find(JSON.parse(data), function(feed) {
+        return feed.id === req.params.id;
+      })
+
+      res.send({feed: feed});
     });
+
   });
 
   feedRouter.put('/:id', function(req, res) {
     res.send({
-      'collection': {
+      'feed': {
         id: req.params.id
       }
     });
@@ -36,5 +42,5 @@ module.exports = function(app) {
     res.status(204).end();
   });
 
-  app.use('/api/collection', feedRouter);
+  app.use('/api/feeds', feedRouter);
 };
