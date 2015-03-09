@@ -4,7 +4,6 @@ export default DS.Model.extend({
 
 	label: DS.attr('string'),
 
-
 	topics: function() {
 
 		//TODO form topics based off feeds

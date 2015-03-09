@@ -8,10 +8,13 @@ module.exports = function(app) {
 
 
   collectionRouter.get('/', function(req, res) {
-    fs.readFile('server/data_store/collections.json', function(err, data) {
-      res.send({
-        collection: JSON.parse(data)
-      });
+    fs.readFile('server/data_store/collections.json', function(err, collectionData) {
+      fs.readFile('server/data_store/feeds.json', function(feedErr, feedData) {
+        res.send({
+          collection: JSON.parse(collectionData),
+          feed: JSON.parse(feedData)
+        });
+      })
     });
   });
 

@@ -8,10 +8,13 @@ module.exports = function(app) {
   var _ = require('lodash');
 
   feedRouter.get('/', function(req, res) {
-    fs.readFile('server/data_store/feeds.json', function(err, data) {
-      res.send({
-        feed: JSON.parse(data)
-      });
+    fs.readFile('server/data_store/collections.json', function(err, collectionData) {
+      fs.readFile('server/data_store/feeds.json', function(feedErr, feedData) {
+        res.send({
+          collection: JSON.parse(collectionData),
+          feed: JSON.parse(feedData)
+        });
+      })
     });
   });
 
@@ -25,7 +28,9 @@ module.exports = function(app) {
         return feed.id === req.params.id;
       })
 
-      res.send({feed: feed});
+      res.send({
+        feed: feed
+      });
     });
 
   });
