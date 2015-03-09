@@ -15,12 +15,18 @@ export default Ember.Component.extend(FlexItemHeightModifierMixin, {
 
 
 	widthPercentToSet: 30,
-	
+
 
 	actions: {
-		filterFeedsByCollectionName: function(collectionId){
+
+		filterFeedsByCollectionName: function(collectionId) {
 			this.sendAction('filterCollectionName', collectionId);
+		},
+
+		addFeedToCollection: function(feedId, collectionId) {
+			this.sendAction('addFeedToCollection', feedId, collectionId);
 		}
+
 	}
 
 

@@ -17,7 +17,7 @@ module.exports = function(app) {
     staticData.forEach(function(collection) {
 
       collection.feeds.forEach(function(feed, i) {
-        feed.collection = [collection.id]
+        feed.collections = [collection.id]
         feeds = feeds.concat(feed);
         collection.feeds[i] = feed.id;
       });
