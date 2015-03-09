@@ -17,13 +17,15 @@ export default Ember.Controller.extend({
 		let collection = this.get('collection');
 
 		if (Ember.isBlank(collection)) {
-			return this.store.findAll('feed');
+			return this.store.all('feed');
 		} else {
-			return this.store.find('feed', {
-				collection: collection
+			return this.store.all('feed').filter(function(feed) {
+
+				if (feed.get('collections').filterBy('id', collection).get('length') > 0) {
+					return feed;
+				}
 			});
 		}
-
 
 
 	}.property('model', 'collection'),
@@ -39,21 +41,19 @@ export default Ember.Controller.extend({
 		},
 
 		addFeedToCollection: function(feedId, collectionId) {
-			
+
 			Ember.debug(`Received request to add ${feedId} to ${collectionId}`);
-			
+
 			let _this = this;
-			
-			_this.store.find('feed', feedId).then(feed => {
-				console.info(feed);
-				_this.store.find('collection', collectionId).then(function(collection){
-					console.info(collection);
-					feed.get('collections').pushObject(collection);	
-				}).then(function(){
-					feed.save();	
+
+			_this.store.all('feed').filter(feed => {
+				if (feed.get('id') === feedId) {
+					return feed;
+				}
+			}).forEach(feed => {
+				_this.store.find('collection', collectionId).then(function(collection) {
+					feed.get('collections').pushObject(collection);
 				});
-				
-				
 			});
 
 		}
