@@ -7,15 +7,15 @@ export default Ember.Component.extend(FlexItemHeightModifierMixin, {
 
 	tagName: 'section',
 
-	
-	heightPercentToSet: 30,
-
 
 	layout: layout,
 
 
 	classNames: ['collections-area'],
 
+
+	widthPercentToSet: 30,
+	
 
 	actions: {
 		filterFeedsByCollectionName: function(collectionId){

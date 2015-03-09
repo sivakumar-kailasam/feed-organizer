@@ -8,9 +8,6 @@ export default Ember.Component.extend(FlexItemHeightModifierMixin, {
 	tagName: 'section',
 
 
-	heightPercentToSet: 50,
-
-
 	layout: layout,
 
 

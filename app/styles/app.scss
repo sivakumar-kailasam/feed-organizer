@@ -1,15 +1,29 @@
-body,
-.ember-view,
-.content-area, {
-	display: flex;
-  	flex-direction: column;
-}
-
+/**
+ * @author Sivakumar Kailasam
+ */
 body {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
 }
+
+
+body,
+.ember-view {
+	display: flex;
+  	flex-direction: column;
+  	align-content: flex-start;
+}
+
+.content-area {
+	display:flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-content: flex-start;
+	align-items: flex-start;
+}
+
 
 .feed-area,
 .collections-area{
@@ -20,22 +34,22 @@ body {
 	padding-bottom: 100px;
 }
 
-.filter-section{
-	overflow: hidden;
-}
 
 .feed-area { 
-	background: yellow;
+	width: 100%;
 }
 
+
 .collections-area {
-	background: #639;
+	min-width: 250px;
+	flex-direction: column;
+  	flex-wrap: nowrap;
 }
+
 
 .feed-card,
 .collection-card {
 	height: 100px;
 	width:  200px;
 	margin: 10px 5px;
-	border: 1px solid #000;
 }
