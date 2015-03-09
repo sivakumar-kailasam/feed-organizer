@@ -47,7 +47,7 @@
     "ember-export-application-global": "^1.0.2",
     "ember-img-manager": "0.0.12",
     "express": "^4.12.2",
-    "glob": "^5.0.1",
+    "glob": "^4.5.1",
     "lodash": "^3.5.0",
     "morgan": "^1.5.1"
   }
