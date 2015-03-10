@@ -20,10 +20,6 @@ body {
 	overflow: hidden;
 }
 
-.content-area {
-
-}
-
 
 .feed-area,
 .collections-area{
@@ -55,10 +51,18 @@ body {
 	cursor: pointer;
 }
 
+.collection-feeds {
+	margin-top: 30px;
+}
 
 .collection-card {
+	
+	height: 150px;
+
 	margin: $collectionCardVerticalMargin $collectionCardVerticalMargin/2 $collectionCardVerticalMargin $collectionCardVerticalMargin/2;
+	
 	background-color: $collectionCardBg;
+	
 	&:hover{
 		background-color: darken($collectionCardBg, 2%) !important;
 	}

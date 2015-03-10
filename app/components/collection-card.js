@@ -54,6 +54,9 @@ export default Ember.Component.extend({
 
 	},
 
+	feedsToPreview: function() {
+		return this.get('collection.feeds').slice(0,5);
+	}.property('collection.feeds'),
 
 
 	actions: {

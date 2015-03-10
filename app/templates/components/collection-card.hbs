@@ -6,6 +6,11 @@
 	<div class="collection-card-content" {{action "showFeedsInCollection"}}>
 		<span class="collection-card-title">{{collection.label}}</span>
 	</div>
+	<div class="collection-feeds">
+		{{#each feed in feedsToPreview}}
+			{{img-wrap src=feed.iconUrl alt=feed.label class="feed-icon"}}
+		{{/each}}
+	</div>
 
 	<button title="Edit collection" class="btn-floating btn waves-effect waves-light edit-collection red"><i class="mdi-image-edit" {{action 'editCollection'}}></i></button>
 {{/if}}
