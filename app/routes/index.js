@@ -6,7 +6,7 @@ export default Ember.Route.extend({
 		return Ember.RSVP.hash({
 			feeds: this.store.findAll('feed'),
 			collections: this.store.all('collection')
-		})
+		});
 	}
 	
 });

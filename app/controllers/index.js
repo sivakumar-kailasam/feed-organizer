@@ -12,23 +12,26 @@ export default Ember.Controller.extend({
 	feed: null,
 
 
+	// A property to trigger changes on modifying collections/feeds
+	_changeWatcherProperty: '',
+
+
 	filteredFeeds: function() {
 
-		let collection = this.get('collection');
+		let collectionId = this.get('collection');
 
-		if (Ember.isBlank(collection)) {
+		if (Ember.isBlank(collectionId)) {
 			return this.store.all('feed');
 		} else {
-			return this.store.all('feed').filter(function(feed) {
-
-				if (feed.get('collections').filterBy('id', collection).get('length') > 0) {
+			return this.store.all('feed').filter(feed => {
+				if (feed.get('collection.id') === collectionId) {
 					return feed;
 				}
 			});
 		}
 
 
-	}.property('model', 'collection'),
+	}.property('_changeWatcherProperty', 'collection'),
 
 
 	collections: Ember.computed.alias('model.collections'),
@@ -46,15 +49,26 @@ export default Ember.Controller.extend({
 
 			let _this = this;
 
-			_this.store.all('feed').filter(feed => {
+			let feed = _this.store.all('feed').filter(feed => {
 				if (feed.get('id') === feedId) {
 					return feed;
 				}
-			}).forEach(feed => {
-				_this.store.find('collection', collectionId).then(function(collection) {
-					feed.get('collections').pushObject(collection);
-				});
+			}).get('firstObject');
+
+			let oldCollection = feed.get('collection');
+
+			_this.store.all('collection').forEach(collection => {
+
+				if (collection.get('id') === oldCollection.get('id')) {
+					collection.get('feeds').removeObject(feed);
+				} else if (collection.get('id') === collectionId) {
+					collection.get('feeds').pushObject(feed);
+					feed.set('collection', collection);
+					_this.set('_changeWatcherProperty', Date.now());
+				}
+
 			});
+
 
 		}
 

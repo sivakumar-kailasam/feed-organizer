@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/collection-canvas';
-import FlexItemHeightModifierMixin from '../mixins/flex-item-height-modifier';
 
-export default Ember.Component.extend(FlexItemHeightModifierMixin, {
+export default Ember.Component.extend({
 
 
 	tagName: 'section',
@@ -15,6 +14,21 @@ export default Ember.Component.extend(FlexItemHeightModifierMixin, {
 
 
 	widthPercentToSet: 30,
+
+
+
+	adjustHeight: function() {
+
+		let collectionCards = this.$().find('.collection-card');
+		let heightToSet = collectionCards.length * (collectionCards.height() + Number(collectionCards.css('margin-top').replace('px','')) + Number(collectionCards.css('margin-bottom').replace('px','')))  + 200;
+
+		if(!heightToSet) {
+			heightToSet= Ember.$(window).height();
+		}
+
+		this.$().height(heightToSet);
+
+	}.on('didInsertElement'),
 
 
 	actions: {
