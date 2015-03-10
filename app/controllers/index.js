@@ -68,7 +68,7 @@ export default Ember.Controller.extend({
 
 
 	collections: function() {
-		return this.get('model.collections').sortBy('order')
+		return this.get('model.collections').sortBy('order');
 	}.property('model.collections'),
 
 
