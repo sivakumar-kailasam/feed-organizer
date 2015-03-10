@@ -14,7 +14,10 @@ export default DS.Model.extend({
 
 	feeds: DS.hasMany('feed', {
 		async: true
-	})
+	}),
+
+
+	order: DS.attr('number')
 
 
 });

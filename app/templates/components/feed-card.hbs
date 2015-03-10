@@ -3,4 +3,5 @@
 </div>
 
 <button title="Delete this feed" class="btn-floating btn waves-effect waves-light delete-feed"><i class="mdi-action-delete" {{action 'deleteFeed'}}></i></button>
+<a title="Open this site" class="btn-floating btn waves-effect waves-light open-feed mdi-action-open-in-new" target="_blank" {{bind-attr href=feed.website}}></a>
 

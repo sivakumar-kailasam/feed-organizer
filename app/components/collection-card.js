@@ -55,16 +55,19 @@ export default Ember.Component.extend({
 	},
 
 
-	
 
 	actions: {
 
-		showFeedsInCollection: function(){
+		showFeedsInCollection: function() {
 			this.sendAction('filterByCollection', this.get('collection.id'));
 		},
 
-		editCollection: function(){
+		editCollection: function() {
 			this.sendAction('renameAction', this.get('collection'));
+		},
+
+		showAllFeeds: function() {
+			this.sendAction('filterByCollection', null);
 		}
 
 	}

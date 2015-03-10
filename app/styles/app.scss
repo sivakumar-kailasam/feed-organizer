@@ -64,6 +64,9 @@ body,
 	color: white;
 	padding-left: 10px;
 	position: relative;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
 }
 
 .collection-card-content { 
@@ -87,12 +90,19 @@ body,
 }
 
 
+.open-feed,
 .delete-feed,
 .edit-collection {
 	font-size: 14px;
 	position: absolute;
 	bottom: 0;
 	left: 10px;
+}
+
+.open-feed {
+	left: 60px;
+	color: white ;
+	font-size: 23px;
 }
 
 button[disabled]{

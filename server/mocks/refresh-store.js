@@ -14,6 +14,7 @@ module.exports = function(app) {
 
   refreshStoreRouter.get('/', function(req, res) {
 
+    var order = 0;
     staticData.forEach(function(collection) {
 
       collection.feeds.forEach(function(feed, i) {
@@ -21,6 +22,7 @@ module.exports = function(app) {
         feeds = feeds.concat(feed);
         collection.feeds[i] = feed.id;
       });
+      collection.order = ++order;
       collections = collections.concat(collection);
     });
 

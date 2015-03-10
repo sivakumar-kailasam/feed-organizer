@@ -67,7 +67,9 @@ export default Ember.Controller.extend({
 	}.property('_changeWatcherProperty', 'collection'),
 
 
-	collections: Ember.computed.alias('model.collections'),
+	collections: function() {
+		return this.get('model.collections').sortBy('order')
+	}.property('model.collections'),
 
 
 	_deleteFeed: function(feedToDelete) {
@@ -83,7 +85,7 @@ export default Ember.Controller.extend({
 
 				Ember.debug(`Delete feed ${feed.get('id')}`);
 				feed.deleteRecord();
-				window.toast(`<span>${feed.get('title')} has been removed</span>`, 3000);
+				window.toast(`<span>${feed.get('title')} has been removed</span>`, 1000);
 				_this.set('_changeWatcherProperty', Date.now());
 			}
 		});
@@ -94,6 +96,7 @@ export default Ember.Controller.extend({
 	actions: {
 
 		filterByCollection: function(collectionId) {
+			Ember.debug(`Filtering by collection id : ${collectionId}`);
 			this.set('collection', collectionId);
 		},
 
