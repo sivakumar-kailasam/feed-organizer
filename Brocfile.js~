@@ -10,6 +10,7 @@ var app = new EmberApp({
 var isProductionBuild = (app.env === 'production');
 var pickFiles = require('broccoli-static-compiler');
 var mergeTrees = require('broccoli-merge-trees');
+var cssLinter = require('broccoli-csslint');
 
 /* Animate.css */
 app.import('bower_components/animate.css/animate.css');
@@ -35,4 +36,8 @@ var materializeFontFiles = pickFiles('bower_components/materialize/dist/font', {
 
 /* Broccolli trees */
 var appTree = app.toTree();
+
+
+appTree = isProductionBuild ? appTree : cssLinter(appTree);
+
 module.exports = mergeTrees([appTree, materializeFontFiles]);
