@@ -6,7 +6,7 @@ $white: #fff;
 $black: #111; 
 
 .draggable-item[draggable=true] {
-   display: inline-block;
+   display: inline-table;
    -moz-user-select: none;
    -khtml-user-drag: element;
    cursor: move;

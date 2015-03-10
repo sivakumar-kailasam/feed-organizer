@@ -1,12 +1,12 @@
 {{#if showAll}}
 	<div class="collection-card-content" {{action "showAllFeeds"}}>
-		<h6>All Feeds</h6>	
+		<span class="all-feeds-title">All Feeds</span>
 	</div>
 {{else}}
 	<div class="collection-card-content" {{action "showFeedsInCollection"}}>
-		<h6>{{collection.label}}</h6>	
+		<span class="collection-card-title">{{collection.label}}</span>
 	</div>
 
-	<button title="Edit collection" class="btn-floating btn waves-effect waves-light edit-collection"><i class="mdi-image-edit" {{action 'editCollection'}}></i></button>
+	<button title="Edit collection" class="btn-floating btn waves-effect waves-light edit-collection red"><i class="mdi-image-edit" {{action 'editCollection'}}></i></button>
 {{/if}}
 

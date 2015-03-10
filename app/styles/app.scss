@@ -8,58 +8,41 @@ $collectionCardBg: white;
 $collectionAreaBg:#DFDFDF;
 $disabledBtnColor:#A9A9A9;
 $invalidContentColor: #F00;
+$cardWidth: 200px;
+$cardHeight: 120px;
+
 
 body {
 	width: 100%;
 	height: 100%;
+	display: block;
+	position: relative;
 	overflow: hidden;
 }
 
-
-body,
-.ember-view {
-	display: flex;
-  	flex-direction: column;
-  	align-content: flex-start;
-}
-
 .content-area {
-	display:flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-content: flex-start;
-	align-items: flex-start;
+
 }
 
 
 .feed-area,
 .collections-area{
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
 	overflow-y: auto;
 	padding-bottom: 100px;
 }
 
-
-.feed-area { 
-	width: 100%;
-}
-
-
 .collections-area {
 	min-width: 250px;
-	flex-direction: column;
-  	flex-wrap: nowrap;
+	width: 250px;
   	background: $collectionAreaBg;
+  	float: left;
 }
 
 
 .feed-card,
 .collection-card {
-	height: 100px;
-	width:  200px;
+	height: $cardHeight;
+	width:  $cardWidth;
 	margin: 10px 5px 10px 20px;
 	color: white;
 	padding-left: 10px;
@@ -84,9 +67,30 @@ body,
 
 .feed-card{
 	background-color: $feedCardBg;
+	
 	&:hover{
 		background-color: lighten($feedCardBg, 15%) !important;
 	}
+
+	h6{
+		text-overflow: ellipsis;
+		  width: $cardWidth - 10;
+		  white-space: nowrap;
+		  position: relative;
+		  overflow: hidden;
+	}
+}
+
+
+.collection-card-title {
+	font-size: 18px;
+}
+
+.all-feeds-title{ 
+	font-size: 20px;
+	position: absolute;
+	top: 40px;
+	left: 50px;
 }
 
 
