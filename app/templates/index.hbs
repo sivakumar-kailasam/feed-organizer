@@ -14,7 +14,7 @@
 		
 		<div class="row">
 			<div {{bind-attr class=":input-field :col :s6 doesNewCollectionNameExist:invalid:valid"}}>
-				{{input name="newCollectionName" type="text" class="input-field" value=newCollectionName}}
+				{{input name="newCollectionName" type="text" class="input-field" value=newCollectionName action="saveCollectionName" on="enter"}}
         				<label for="newCollectionName">Collection Name</label>
       			</div>
       		</div>
@@ -33,4 +33,23 @@
       		<button {{action "saveCollectionName"}} class="waves-effect waves-green btn-flat modal-action" {{bind-attr disabled="_isSaveDisabled"}}>Save</button>
       		<button class="waves-effect waves-green btn-flat modal-action modal-close">Cancel</button>
     	</div>
+  </div>
+
+<div id="delete-feed-confirmation-dialog" class="modal">
+  <div class="modal-content">
+    
+    <h3>Are you sure you want to stop reading {{feedToRemove.title}} ?</h3>
+
+     <p>
+            <input name="skipConfirmOnDelete" type="checkbox" {{bind-attr checked=skipConfirmOnDelete}}>
+            <label for="skipConfirmOnDelete" {{action "toggleSkipConfirmOnDelete"}}>Skip this dialog in the future </label>
+            <blockquote>Choosing to skip this dialog would mean that feeds get deleted immediately without any confirmation in the future</blockquote>
+    </p>
+    
+
+      </div>
+      <div class="modal-footer">
+          <button {{action "deleteFeed" feedToRemove true}} class="waves-effect waves-green btn-flat modal-action">Yes</button>
+          <button class="waves-effect waves-green btn-flat modal-action modal-close">No</button>
+      </div>
   </div>

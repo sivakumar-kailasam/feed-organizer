@@ -18,6 +18,12 @@ export default Ember.Controller.extend({
 	newCollectionName: null,
 
 
+	skipConfirmOnDelete: false,
+
+
+	feedToRemove: null,
+
+
 	doesNewCollectionNameExist: function() {
 
 		let existingCollectionNames = this.store.all('collection').getEach('label');
@@ -62,28 +68,42 @@ export default Ember.Controller.extend({
 	collections: Ember.computed.alias('model.collections'),
 
 
+	_deleteFeed: function(feedToDelete) {
+
+		let _this = this;
+
+		this.store.all('feed').forEach(feed => {
+			if (feedToDelete.get('id') === feed.get('id')) {
+
+				_this.store.all('collection').forEach(collection => {
+					collection.get('feeds').removeObject(feed);
+				});
+
+				Ember.debug(`Delete feed ${feed.get('id')}`);
+				feed.deleteRecord();
+				window.toast(`<span>${feed.get('title')} has been removed</span>`, 3000);
+				_this.set('_changeWatcherProperty', Date.now());
+			}
+		});
+
+	},
+
+
 	actions: {
 
 		filterByCollection: function(collectionId) {
 			this.set('collection', collectionId);
 		},
 
-		deleteFeed: function(feedToDelete) {
+		deleteFeed: function(feedToDelete, skipDialog) {
 
-			let _this = this;
-
-			this.store.all('feed').forEach(feed => {
-				if (feedToDelete.get('id') === feed.get('id')) {
-
-					_this.store.all('collection').forEach(collection => {
-						collection.get('feeds').removeObject(feed);
-					});
-
-					Ember.debug(`Delete feed ${feed.get('id')}`);
-					feed.deleteRecord();
-					_this.set('_changeWatcherProperty', Date.now());
-				}
-			});
+			if (this.get('skipConfirmOnDelete') || skipDialog) {
+				this._deleteFeed(feedToDelete);
+				Ember.$('#delete-feed-confirmation-dialog').closeModal();
+			} else {
+				this.set('feedToRemove', feedToDelete);
+				Ember.$('#delete-feed-confirmation-dialog').openModal();
+			}
 
 		},
 
@@ -99,7 +119,9 @@ export default Ember.Controller.extend({
 
 		saveCollectionName: function() {
 
-			this.set('doesNewCollectionNameExist', false);
+			if (this.get('_isSaveDisabled')) {
+				return;
+			}
 
 			let newCollectionName = this.get('newCollectionName');
 			let prevCollectionName = this.get('prevCollectionName');
@@ -114,6 +136,8 @@ export default Ember.Controller.extend({
 			this.set('_changeWatcherProperty', Date.now());
 
 			Ember.$('#collection-rename-dialog').closeModal();
+
+			window.toast(`${prevCollectionName} is now called ${newCollectionName}`, 4000);
 
 		},
 
@@ -144,6 +168,11 @@ export default Ember.Controller.extend({
 			});
 
 
+		},
+
+
+		toggleSkipConfirmOnDelete: function() {
+			this.toggleProperty('skipConfirmOnDelete');
 		}
 
 	}
