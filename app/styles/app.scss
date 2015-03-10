@@ -1,6 +1,14 @@
 /**
  * @author Sivakumar Kailasam
  */
+@import "drag";
+
+$feedCardBg: #1976D2;
+$collectionCardBg: white;
+$collectionAreaBg:#DFDFDF;
+$disabledBtnColor:#A9A9A9;
+$invalidContentColor: #F00;
+
 body {
 	width: 100%;
 	height: 100%;
@@ -44,7 +52,7 @@ body,
 	min-width: 250px;
 	flex-direction: column;
   	flex-wrap: nowrap;
-  	background: #DFDFDF;
+  	background: $collectionAreaBg;
 }
 
 
@@ -53,55 +61,71 @@ body,
 	height: 100px;
 	width:  200px;
 	margin: 10px 5px 10px 20px;
-}
-
-.collection-card {
-	background: white;
-}
-
-.feed-card{
-	background: #1976D2;
 	color: white;
 	padding-left: 10px;
 	position: relative;
 }
 
+.collection-card-content { 
+	cursor: pointer;
+}
 
-.delete-feed {
+
+.collection-card {
+	background-color: $collectionCardBg;
+	&:hover{
+		background-color: darken($collectionCardBg, 2%) !important;
+	}
+}
+
+
+.feed-card{
+	background-color: $feedCardBg;
+	&:hover{
+		background-color: lighten($feedCardBg, 15%) !important;
+	}
+}
+
+
+.delete-feed,
+.edit-collection {
 	font-size: 14px;
 	position: absolute;
 	bottom: 0;
 	left: 10px;
 }
 
-$default-margin: 20px;
-$gray-light: #e1e1e1;
-$gray-medium: #aaa; 
-$green: #2ecc71; 
-$white: #fff; 
-$black: #111; 
-
-.draggable-item[draggable=true] {
-   display: inline-block;
-   -moz-user-select: none;
-   -khtml-user-drag: element;
-   cursor: move;
-   &:hover {
-     background-color: $gray-medium;
-   }
+button[disabled]{
+	color: $disabledBtnColor;
 }
 
 
-*:-khtml-drag {
-  background-color: rgba(238,238,238, 0.5);
-}
+.invalid {
+	
+	.input-field,
+	input[type=text]:focus {
+		color: $invalidContentColor;
+		border-bottom: 1px solid $invalidContentColor;
+		box-shadow: 0 1px 0 0 $invalidContentColor;
+	}	
+	
+	label,
+	.input-field label.active,
+	.input-field input[type=text]:focus + label, {
+		color: $invalidContentColor;
+	}
+} 
 
 
-.draggable-dropzone {
-   &.activated {
-     border-color: $green;
-   }
-   &.deactivated {
-     border-color: $gray-light;
-   }
+.modal {
+
+	.row { 
+		margin-bottom: 0;
+	}
+
+	.mdi-action-info-outline{
+		color: $invalidContentColor;
+		font-size: 14px;
+	}
+
 }

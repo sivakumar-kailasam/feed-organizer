@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 	layout: layout,
 
 
-	classNames: ['collection-card', 'z-depth-1'],
+	classNames: ['collection-card', 'z-depth-1', 'blue-text'],
 
 
 	classNameBindings: ['dragClass'],
@@ -55,8 +55,18 @@ export default Ember.Component.extend({
 	},
 
 
-	click: function() {
-		this.sendAction('filterByCollection', this.get('collection.id'));
+	
+
+	actions: {
+
+		showFeedsInCollection: function(){
+			this.sendAction('filterByCollection', this.get('collection.id'));
+		},
+
+		editCollection: function(){
+			this.sendAction('renameAction', this.get('collection'));
+		}
+
 	}
 
 

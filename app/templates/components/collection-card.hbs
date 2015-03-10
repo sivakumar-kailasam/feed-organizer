@@ -1,3 +1,6 @@
-<div class="collection-card-content">
+<div class="collection-card-content" {{action "showFeedsInCollection"}}>
 	<h6>{{collection.label}}</h6>	
 </div>
+
+<button title="Edit collection" class="btn-floating btn waves-effect waves-light edit-collection"><i class="mdi-image-edit" {{action 'editCollection'}}></i></button>
+

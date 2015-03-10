@@ -39,6 +39,10 @@ export default Ember.Component.extend({
 
 		addFeedToCollection: function(feedId, collectionId) {
 			this.sendAction('addFeedToCollection', feedId, collectionId);
+		},
+
+		passRenameAction: function(collection){
+			this.sendAction('renameAction', collection);
 		}
 
 	}

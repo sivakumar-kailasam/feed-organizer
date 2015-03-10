@@ -12,6 +12,31 @@ export default Ember.Controller.extend({
 	feed: null,
 
 
+	prevCollectionName: null,
+
+
+	newCollectionName: null,
+
+
+	doesNewCollectionNameExist: function() {
+
+		let existingCollectionNames = this.store.all('collection').getEach('label');
+		let newCollectionName = this.get('newCollectionName');
+
+		if (newCollectionName === this.get('prevCollectionName')) {
+			return false;
+		}
+
+		return (existingCollectionNames.indexOf(newCollectionName) !== -1);
+
+	}.property('newCollectionName'),
+
+
+	_isSaveDisabled: function() {
+		return Ember.isEmpty(this.get('newCollectionName')) && this.get('doesNewCollectionNameExist');
+	}.property('newCollectionName', 'doesNewCollectionNameExist'),
+
+
 	// A property to trigger changes on modifying collections/feeds
 	_changeWatcherProperty: '',
 
@@ -59,6 +84,36 @@ export default Ember.Controller.extend({
 					_this.set('_changeWatcherProperty', Date.now());
 				}
 			});
+
+		},
+
+
+		renameCollection: function(collection) {
+			this.setProperties({
+				'prevCollectionName': collection.get('label'),
+				'newCollectionName': collection.get('label')
+			});
+			Ember.$('#collection-rename-dialog').openModal();
+			Ember.$('input[name="newCollectionName"]').focus();
+		},
+
+		saveCollectionName: function() {
+
+			this.set('doesNewCollectionNameExist', false);
+
+			let newCollectionName = this.get('newCollectionName');
+			let prevCollectionName = this.get('prevCollectionName');
+
+			this.store.all('collection').forEach(collection => {
+				if (collection.get('label') === prevCollectionName) {
+					collection.set('label', newCollectionName);
+				}
+			});
+
+
+			this.set('_changeWatcherProperty', Date.now());
+
+			Ember.$('#collection-rename-dialog').closeModal();
 
 		},
 

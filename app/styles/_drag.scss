@@ -1,0 +1,31 @@
+$default-margin: 20px;
+$gray-light: #e1e1e1;
+$gray-medium: #aaa; 
+$green: #2ecc71; 
+$white: #fff; 
+$black: #111; 
+
+.draggable-item[draggable=true] {
+   display: inline-block;
+   -moz-user-select: none;
+   -khtml-user-drag: element;
+   cursor: move;
+   &:hover {
+     background-color: $gray-medium;
+   }
+}
+
+
+*:-khtml-drag {
+  background-color: rgba(238,238,238, 0.5);
+}
+
+
+.draggable-dropzone {
+   &.activated {
+     border-color: $green;
+   }
+   &.deactivated {
+     border-color: $gray-light;
+   }
+}
