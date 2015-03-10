@@ -2,6 +2,10 @@
 
 module.exports = function(environment) {
   var ENV = {
+    imgManager: {
+      loadingSrc: 'http://techandloathing.info/wp-content/uploads/2014/02/flat-icon-rss.png',
+      errorSrc: 'http://techandloathing.info/wp-content/uploads/2014/02/flat-icon-rss.png'
+    },
     modulePrefix: 'feed-organizer',
     environment: environment,
     baseURL: '/',

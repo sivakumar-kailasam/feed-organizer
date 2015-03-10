@@ -55,7 +55,22 @@ export default Ember.Component.extend({
 	},
 
 	feedsToPreview: function() {
-		return this.get('collection.feeds').slice(0,5);
+		return this.get('collection.feeds').slice(0, 5);
+	}.property('collection.feeds'),
+
+
+	feedLength: function() {
+
+		let noOfFeeds = this.get('collection.feeds').get('length');
+
+		if (noOfFeeds === 0) {
+			return 'No Feeds';
+		} else if (noOfFeeds === 1) {
+			return '1 Feed';
+		} else {
+			return `${noOfFeeds} Feeds`;
+		}
+
 	}.property('collection.feeds'),
 
 
