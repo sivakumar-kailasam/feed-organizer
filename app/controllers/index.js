@@ -43,6 +43,25 @@ export default Ember.Controller.extend({
 			this.set('collection', collectionId);
 		},
 
+		deleteFeed: function(feedToDelete) {
+
+			let _this = this;
+
+			this.store.all('feed').forEach(feed => {
+				if (feedToDelete.get('id') === feed.get('id')) {
+
+					_this.store.all('collection').forEach(collection => {
+						collection.get('feeds').removeObject(feed);
+					});
+
+					Ember.debug(`Delete feed ${feed.get('id')}`);
+					feed.deleteRecord();
+					_this.set('_changeWatcherProperty', Date.now());
+				}
+			});
+
+		},
+
 		addFeedToCollection: function(feedId, collectionId) {
 
 			Ember.debug(`Received request to add ${feedId} to ${collectionId}`);

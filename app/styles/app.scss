@@ -53,9 +53,26 @@ body,
 	height: 100px;
 	width:  200px;
 	margin: 10px 5px 10px 20px;
+}
+
+.collection-card {
 	background: white;
 }
 
+.feed-card{
+	background: #1976D2;
+	color: white;
+	padding-left: 10px;
+	position: relative;
+}
+
+
+.delete-feed {
+	font-size: 14px;
+	position: absolute;
+	bottom: 0;
+	left: 10px;
+}
 
 $default-margin: 20px;
 $gray-light: #e1e1e1;

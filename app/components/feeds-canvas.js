@@ -18,6 +18,15 @@ export default Ember.Component.extend({
 		let windowHeight = Ember.$(window).height();
 		this.$().height(windowHeight);
 
-	}.on('didInsertElement')
+	}.on('didInsertElement'),
+
+
+	actions: {
+
+		passDeleteFeedRequest: function(feed) {
+			this.sendAction('deleteFeed', feed);
+		}
+		
+	}
 
 });
