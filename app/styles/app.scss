@@ -44,6 +44,7 @@ body,
 	min-width: 250px;
 	flex-direction: column;
   	flex-wrap: nowrap;
+  	background: #DFDFDF;
 }
 
 
@@ -51,7 +52,8 @@ body,
 .collection-card {
 	height: 100px;
 	width:  200px;
-	margin: 10px 5px;
+	margin: 10px 5px 10px 20px;
+	background: white;
 }
 
 

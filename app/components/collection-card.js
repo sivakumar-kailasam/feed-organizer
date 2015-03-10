@@ -28,21 +28,29 @@ export default Ember.Component.extend({
 		return this.set('dragClass', 'z-depth-3');
 	},
 
-
-	drop: function(event) {
-
-		let data;
+	animateCardDrop: function(effectToUse) {
 		let _this = this;
-		let collectionId = _this.get('collection.id');
-		_this.set('dragClass', 'animated pulse');
+		_this.set('dragClass', 'animated ' + effectToUse);
 
 		Ember.run.later(function() {
 			_this.set('dragClass', '');
 		}, 1000);
+	},
 
-		data = event.dataTransfer.getData('text/data');
-		Ember.debug(`Dropped feed ${data} on collection ${collectionId}`);
-		return _this.sendAction('addFeedToCollection', data, collectionId);
+	drop: function(event) {
+
+		let feedId = event.dataTransfer.getData('text/data');
+
+		if (this.get('collection').get('feeds').filterBy('id', feedId).get('length')) {
+			return this.animateCardDrop('shake');
+		}
+
+		let collectionId = this.get('collection.id');
+
+		this.animateCardDrop('pulse');
+
+		Ember.debug(`Dropped feed ${feedId} on collection ${collectionId}`);
+		return this.sendAction('addFeedToCollection', feedId, collectionId);
 
 	},
 
