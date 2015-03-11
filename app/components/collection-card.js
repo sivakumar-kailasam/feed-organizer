@@ -32,16 +32,31 @@ export default Ember.Component.extend({
 
 
 	dragLeave: function(event) {
+		
+		if (this.get('disableFeedAddition')) {
+			return;
+		}
+		
 		event.preventDefault();
 		return this.set('dragClass', '');
 	},
 
 	dragOver: function(event) {
+		
+		if (this.get('disableFeedAddition')) {
+			return;
+		}
+		
 		event.preventDefault();
 		return this.set('dragClass', 'z-depth-3');
 	},
 
 	animateCardDrop: function(effectToUse) {
+		
+		if (this.get('disableFeedAddition')) {
+			return;
+		}
+
 		let _this = this;
 		_this.set('dragClass', 'animated ' + effectToUse);
 
@@ -51,6 +66,10 @@ export default Ember.Component.extend({
 	},
 
 	drop: function(event) {
+
+		if (this.get('disableFeedAddition')) {
+			return;
+		}
 
 		let feedId = event.dataTransfer.getData('text/data');
 
