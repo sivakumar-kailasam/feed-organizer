@@ -23,6 +23,7 @@ module.exports = function(app) {
         collection.feeds[i] = feed.id;
       });
       collection.order = ++order;
+      collection.isShared = false;
       collections = collections.concat(collection);
     });
 

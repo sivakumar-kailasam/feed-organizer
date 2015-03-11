@@ -1,4 +1,12 @@
 {{collection-card showAll=true  filterByCollection="filterFeedsByCollectionName"}}
 {{#each collection in collections}}
-	{{collection-card collection=collection filterByCollection="filterFeedsByCollectionName" addFeedToCollection="addFeedToCollection" renameAction="passRenameAction"}}
+	
+	{{collection-card 
+		collection=collection 
+		filterByCollection="filterFeedsByCollectionName" 
+		addFeedToCollection="addFeedToCollection" 
+		renameAction="passRenameAction"
+		toggleCollectionVisibility="toggleCollectionVisibility"
+	}}
+
 {{/each}}

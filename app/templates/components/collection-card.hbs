@@ -13,6 +13,10 @@
 	</div>
 
 	<button title="Edit collection" class="btn-floating btn waves-effect waves-light edit-collection red"><i class="mdi-image-edit" {{action 'editCollection'}}></i></button>
+	<button title="Share collection" 
+		{{bind-attr class=":btn-floating :btn :waves-effect :waves-light :share-collection collection.isShared:mdi-action-lock-open:mdi-action-lock-outline collection.isShared:shared-collection:private-collection"}} 
+		{{action 'toggleCollectionVisibility'}}>
+	</button>
 	<span class="collection-feed-count">{{feedLength}}</span>
 {{/if}}
 

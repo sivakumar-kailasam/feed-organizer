@@ -19,14 +19,6 @@ export default Ember.Component.extend({
 
 	adjustHeight: function() {
 
-		// let collectionCards = this.$().find('.collection-card');
-		// let heightToSet = collectionCards.length * (collectionCards.height() + Number(collectionCards.css('margin-top').replace('px','')) + Number(collectionCards.css('margin-bottom').replace('px','')))  + 200;
-
-		// if(!heightToSet) {
-			// heightToSet= Ember.$(window).height();
-		// }
-
-		// this.$().height(heightToSet);
 		this.$().height(Ember.$(window).height());
 
 	}.on('didInsertElement'),
@@ -42,8 +34,12 @@ export default Ember.Component.extend({
 			this.sendAction('addFeedToCollection', feedId, collectionId);
 		},
 
-		passRenameAction: function(collection){
+		passRenameAction: function(collection) {
 			this.sendAction('renameAction', collection);
+		},
+
+		toggleCollectionVisibility: function(collection) {
+			this.sendAction('toggleCollectionVisibility', collection);
 		}
 
 	}

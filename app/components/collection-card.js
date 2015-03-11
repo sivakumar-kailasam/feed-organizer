@@ -86,6 +86,10 @@ export default Ember.Component.extend({
 
 		showAllFeeds: function() {
 			this.sendAction('filterByCollection', null);
+		},
+
+		toggleCollectionVisibility: function() {
+			this.sendAction('toggleCollectionVisibility', this.get('collection'));
 		}
 
 	}

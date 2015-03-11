@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 
-
 export default Ember.Controller.extend({
 
 
@@ -178,6 +177,22 @@ export default Ember.Controller.extend({
 
 		toggleSkipConfirmOnDelete: function() {
 			this.toggleProperty('skipConfirmOnDelete');
+		},
+
+		toggleCollectionVisibility: function(collectionToShare) {
+			let _this = this;
+			let newStatus;
+			this.store.all('collection').filter(collection => {
+				if (collectionToShare.get('id') === collection.get('id')) {
+					Ember.debug(`Toggling visibility of collection ${collection.title}`);
+					collection.toggleProperty('isShared');
+					newStatus = collection.get('isShared');
+					_this.set('_changeWatcherProperty', Date.now());
+				}
+			});
+
+			let status = newStatus? 'shared' : 'private';
+			window.toast(`${collectionToShare.get('label')} is now a ${status} collection`, 4000);
 		}
 
 	}

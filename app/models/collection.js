@@ -17,7 +17,10 @@ export default DS.Model.extend({
 	}),
 
 
-	order: DS.attr('number')
+	order: DS.attr('number'),
+
+
+	isShared: DS.attr('boolean')
 
 
 });

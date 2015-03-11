@@ -1,6 +1,11 @@
 <div class="content-area">
 
-	{{collection-canvas collections=collections filterCollectionName="filterByCollection" addFeedToCollection="addFeedToCollection" renameAction="renameCollection"}}
+	{{collection-canvas 
+              collections=collections 
+              filterCollectionName="filterByCollection" 
+              addFeedToCollection="addFeedToCollection" 
+              renameAction="renameCollection"
+              toggleCollectionVisibility="toggleCollectionVisibility"}}
 	
 	{{feeds-canvas feeds=filteredFeeds deleteFeed="deleteFeed"}}
 
