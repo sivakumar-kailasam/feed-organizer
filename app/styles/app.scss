@@ -86,6 +86,10 @@ body {
 	}
 }
 
+.uncategorized {
+	background-color: red;
+}
+
 
 .collection-card-title {
 	font-size: 18px;
@@ -97,14 +101,16 @@ body {
 	right: 15px;
 }
 
-.private-collection{
+.private-collection,
+.private-collection:active{
 	background-color: #646464;
 	&:hover {
 		background-color: lighten(#646464, 10%);
 	}
 }
 
-.shared-collection {
+.shared-collection,
+.shared-collection:active {
 	background-color: #31a92f;
 	&:hover {
 		background-color: lighten(#31a92f, 10%);

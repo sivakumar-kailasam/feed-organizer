@@ -8,6 +8,12 @@ export default Ember.Component.extend({
 
 	classNames: ['feed-card', 'z-depth-1', 'draggable-item'],
 
+	classNameBindings: ['uncategorized'],
+
+	uncategorized: function() {
+		return Ember.isBlank(this.get('feed.collection'));
+	}.property('feed.collection'),
+
 	attributeBindings: ['draggable'],
 
 	draggable: true,
@@ -21,7 +27,7 @@ export default Ember.Component.extend({
 		deleteFeed: function() {
 			this.sendAction('action', this.get('feed'));
 		}
-		
+
 	}
 
 });
