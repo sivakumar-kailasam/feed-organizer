@@ -49,7 +49,7 @@ export default Ember.Mixin.create({
 
 		saveCollectionName: function() {
 
-			if (this.get('_isSaveDisabled')) {
+			if (this.get('_isSaveDisabled') || this.get('doesNewCollectionNameExist')) {
 				return;
 			}
 
