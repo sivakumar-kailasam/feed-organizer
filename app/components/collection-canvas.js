@@ -1,28 +1,22 @@
 import Ember from 'ember';
 import layout from '../templates/components/collection-canvas';
 
+
 export default Ember.Component.extend({
 
-
-	tagName: 'section',
-
-
 	layout: layout,
-
+	
+	tagName: 'section',
 
 	classNames: ['collections-area'],
 
-
 	widthPercentToSet: 30,
-
-
 
 	adjustHeight: function() {
 
 		this.$().height(Ember.$(window).height());
 
 	}.on('didInsertElement'),
-
 
 	actions: {
 
@@ -43,6 +37,5 @@ export default Ember.Component.extend({
 		}
 
 	}
-
 
 });

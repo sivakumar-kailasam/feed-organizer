@@ -4,24 +4,37 @@ import layout from '../templates/components/collection-card';
 
 export default Ember.Component.extend({
 
-
 	layout: layout,
-
 
 	classNames: ['collection-card', 'z-depth-1', 'blue-text'],
 
-
 	classNameBindings: ['dragClass'],
 
-
 	dragClass: '',
+
+	feedsToPreview: function() {
+		return this.get('collection.feeds').slice(0, 5);
+	}.property('collection.feeds'),
+
+	feedLength: function() {
+
+		let noOfFeeds = this.get('collection.feeds').get('length');
+
+		if (noOfFeeds === 0) {
+			return 'No Feeds';
+		} else if (noOfFeeds === 1) {
+			return '1 Feed';
+		} else {
+			return `${noOfFeeds} Feeds`;
+		}
+
+	}.property('collection.feeds'),
 
 
 	dragLeave: function(event) {
 		event.preventDefault();
 		return this.set('dragClass', '');
 	},
-
 
 	dragOver: function(event) {
 		event.preventDefault();
@@ -53,25 +66,6 @@ export default Ember.Component.extend({
 		return this.sendAction('addFeedToCollection', feedId, collectionId);
 
 	},
-
-	feedsToPreview: function() {
-		return this.get('collection.feeds').slice(0, 5);
-	}.property('collection.feeds'),
-
-
-	feedLength: function() {
-
-		let noOfFeeds = this.get('collection.feeds').get('length');
-
-		if (noOfFeeds === 0) {
-			return 'No Feeds';
-		} else if (noOfFeeds === 1) {
-			return '1 Feed';
-		} else {
-			return `${noOfFeeds} Feeds`;
-		}
-
-	}.property('collection.feeds'),
 
 
 	actions: {
